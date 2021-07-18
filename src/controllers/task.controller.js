@@ -29,11 +29,22 @@ const showTasks = async (req, res) => {
   }
 }
 
+const deleteTask = async (req, res) => {
+  try {        
+     const { id } = req.params;
+     await Task.deleteOne({_id:id })            
+     res.redirect('/tasks');        
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 
 module.exports = {
   getHome,
   createTask,
-  showTasks
+  showTasks,
+  deleteTask
 }
 
 

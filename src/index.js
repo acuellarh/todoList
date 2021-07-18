@@ -7,6 +7,7 @@ const app = express()
 const path = require('path')
 const hbs = require('express-handlebars');
 
+const methodOverride = require('method-override')
 const taskRoutes = require('./routes/task.routes');
 
 // mongo db connection
@@ -15,6 +16,8 @@ require('./config/dbConfig');
 //express setting
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+
+app.use(methodOverride('_method', {methods: ["POST", "GET"] }))
 
 
 //handlebars
