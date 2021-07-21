@@ -1,8 +1,11 @@
 const Task = require('../models/task/task.model')
+const app = require("../index");
 
 const getHome = (req, res) => {
   try {
-    res.render('index')  
+    //res.render('index')  
+    req.session.views = (req.session.views || 0) + 1
+    res.render('index', {views:req.session.views} )
 
   } catch (error) {
     throw new Error(error)

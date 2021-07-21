@@ -39,20 +39,10 @@ app.engine('.hbs', hbs({
 })) 
  
 app.set('view engine', 'hbs')
- 
-
-app.get('/prueba', async (req, res)=>{  
-    try{
-        req.session.views = (req.session.views || 0) + 1
-        res.render('index', {views:req.session.views} )
-    } catch (error) {
-        throw new Error(error)
-    }
-})
 
 app.use('/', taskRoutes )
 
 
-
+module.exports = app;
 
 app.listen(process.env.PORT || 3000, console.log(`runnig in port ${process.env.PORT || 3000}`))
