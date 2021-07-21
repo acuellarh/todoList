@@ -2,7 +2,8 @@ const Task = require('../models/task/task.model')
 
 const getHome = (req, res) => {
   try {
-    res.render('index')    
+    res.render('index')  
+
   } catch (error) {
     throw new Error(error)
   }
