@@ -9,6 +9,7 @@ const hbs = require('express-handlebars');
 const cookieSession = require('cookie-session')
 const methodOverride = require('method-override')
 const taskRoutes = require('./routes/task.routes');
+const userRoutes = require('./routes/user.routes');
 
 // mongo db connection
 require('./config/dbConfig');
@@ -41,7 +42,7 @@ app.engine('.hbs', hbs({
 app.set('view engine', 'hbs')
 
 app.use('/', taskRoutes )
-
+app.use('/', userRoutes )
 
 module.exports = app;
 
