@@ -1,8 +1,5 @@
 const User  = require('../models/modelUser')
 const app = require("../index");
-const bcrypt = require('bcrypt')
-
-
 
 const createUserForm = (req, res) => {
   res.render('register')
@@ -18,26 +15,33 @@ const createUser = async (req, res ) => {
   } catch (error) {
     throw new Error(error)
   }
-  // const { email, password } = req.body;
-  // try {
-  //   const user = new User({email, password})
-  //   await user.save() 
-  //   res.redirect("/login") 
-  // } catch (error) {
-  //   throw new Error(error)
-  // }
 }
 
 const loginUserForm =  (req, res) => {
   res.render('login')
 }
 
-const loginUser =  (req, res) => {
+const loginUser =  async (req, res) => {
+  try {
+    const user = await User.authenticate(req.body.email, req.body.password)
+    //Si la autenticación es correcta, guarda en la sesion el id del usuario
+    if(user){
+      req.session.userId = user._id
+      return res.redirect('/tasks')
+    } else {
+      res.render('/login', {error: 'Wrong email or password. Try again!'})
+    }
+  } catch (error) {
+    throw new Error(error)
+  }
 
 }
 
 const logoutUser =  (req, res) => {
-
+  res.session = null
+  res.clearCookie('session')
+  res.clearCookie('session.sig')
+  res.redirect('/login')
 }
 
 
