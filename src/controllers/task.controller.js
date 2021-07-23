@@ -16,9 +16,9 @@ const getHome = (req, res) => {
 const createTask = async (req, res) => {
   const { title, description } = req.body;
   try {
-    const task = new Task({title, description})
+    const task = new Task({title, description, user: res.locals.user })
     await task.save()
-    const tasks = await Task.find()
+    const tasks = await Task.find({user: res.locals.user})
     res.render('tasks', { tasks })
   } catch (error) {
     throw new Error(error)
@@ -27,7 +27,7 @@ const createTask = async (req, res) => {
 
 const showTasks = async (req, res) => { 
   try {
-    const tasks = await Task.find()
+    const tasks = await Task.find({user: res.locals.user})
     res.render('tasks', { tasks })
   } catch (error) {
     throw new Error(error)
