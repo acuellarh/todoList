@@ -1,6 +1,7 @@
 const Task = require('../models/task/task.model')
 const app = require("../index");
 
+
 const getHome = (req, res) => {
   try {
     //res.render('index')  

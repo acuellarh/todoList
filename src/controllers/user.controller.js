@@ -1,6 +1,10 @@
 const User  = require('../models/modelUser')
 const app = require("../index");
 
+
+
+//routes
+
 const createUserForm = (req, res) => {
   res.render('register')
 }
@@ -37,8 +41,10 @@ const loginUser =  async (req, res) => {
 
 }
 
-const logoutUser =  (req, res) => {
-  res.session = null
+const logoutUser =  (req, res) => { 
+  // destruye la session
+  req.session = null
+  //limpia las cookies
   res.clearCookie('session')
   res.clearCookie('session.sig')
   res.redirect('/login')

@@ -24,6 +24,22 @@ app.use(cookieSession({
 
 app.use(methodOverride('_method', {methods: ["POST", "GET"] }))
 
+//midlewares
+
+const User  = require('../src/models/modelUser')
+
+app.use(async (req, res, next) => {
+  const userId = req.session.userId
+  if(userId){
+      const user = await User.findById(userId)
+      if(user){
+          res.locals.user = user            
+      }else{
+       delete req.session.userId
+      }
+  }
+  next()    
+})
 
 //handlebars
 app.set('views', path.join(__dirname, 'views'))
