@@ -16,10 +16,9 @@
       <th scope="row"></th>
       <td>{{title}}</td>
       <td>{{description}}</td>
-      <td>{{status}}</td>    
-      <td><i class="fas fa-edit"></i></td>
-      <td><a href="/delete/task/{{_id}}?_method=DELETE"><i class="fas fa-trash-alt"></i> </a></td>       
+      <td>{{status}}</td>        
+      <td><a href="/tasks/edit/{{_id}}"><i class="fas fa-edit""></i> </a></td> 
+      <td><a href="/tasks/delete/{{_id}}?_method=DELETE"><i class="fas fa-trash-alt"></i> </a></td>       
     </tr>
     {{/each}} 
     </tbody>
-</table>

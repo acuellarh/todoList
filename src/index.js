@@ -15,14 +15,14 @@ const userRoutes = require('./routes/user.routes');
 require('./config/dbConfig');
 
 //express setting
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.use(cookieSession({ 
     secret: "session" ,
     maxAge: 24 * 60 * 60 * 1000
   }));
 
-app.use(methodOverride('_method', {methods: ["POST", "GET"] }))
+app.use(methodOverride('_method', {methods: ["POST", "GET"]}))
 
 //midlewares
 

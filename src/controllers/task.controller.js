@@ -44,12 +44,27 @@ const deleteTask = async (req, res) => {
   }
 }
 
+const renderEditForm = async (req, res) => {
+  const task = await Task.findById(req.params.id)
+  res.render('edit-task', { task })
+}
+
+const updateNote = async (req, res) => {
+  console.log(req.body)
+  const {title, description} = req.body
+  await Task.findByIdAndUpdate(req.params.id, {title, description})
+  res.redirect('/tasks')  
+}
+
+
 
 module.exports = {
   getHome,
   createTask,
   showTasks,
-  deleteTask
+  deleteTask,
+  renderEditForm,
+  updateNote
 }
 
 
