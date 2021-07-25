@@ -15,13 +15,28 @@ const getHome = (req, res) => {
 
 const createTask = async (req, res) => {
   const { title, description } = req.body;
-  try {
-    const task = new Task({title, description, user: res.locals.user })
-    await task.save()    
-    req.flash('success_msg', 'Task Addedd Successfully')
-    res.redirect('tasks')
-  } catch (error) {
-    throw new Error(error)
+  const errors = [];
+  if (!title) {
+    errors.push({ text: "Please Write a Title." });
+  }
+  if (!description) {
+    errors.push({ text: "Please Write a Description" });
+  }
+  if (errors.length > 0) {
+    res.render("index", {
+      errors,
+      title,
+      description,
+    });
+  } else {
+    try {
+      const task = new Task({title, description, user: res.locals.user })
+      await task.save()    
+      req.flash('success_msg', 'Task Addedd Successfully')
+      res.redirect('tasks')
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 }
 
