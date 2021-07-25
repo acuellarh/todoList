@@ -17,9 +17,9 @@ const createTask = async (req, res) => {
   const { title, description } = req.body;
   try {
     const task = new Task({title, description, user: res.locals.user })
-    await task.save()
-    const tasks = await Task.find({user: res.locals.user})
-    res.render('tasks', { tasks })
+    await task.save()    
+    req.flash('success_msg', 'Task Addedd Successfully')
+    res.redirect('tasks')
   } catch (error) {
     throw new Error(error)
   }
@@ -37,7 +37,8 @@ const showTasks = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {        
      const { id } = req.params;
-     await Task.deleteOne({_id:id })            
+     await Task.deleteOne({_id:id })  
+     req.flash('success_msg', 'Task Deleted Successfully')          
      res.redirect('/tasks');        
   } catch (error) {
     throw new Error(error)
@@ -53,6 +54,7 @@ const updateNote = async (req, res) => {
   console.log(req.body)
   const {title, description} = req.body
   await Task.findByIdAndUpdate(req.params.id, {title, description})
+  req.flash('success_msg', 'Task Updated Successfully')
   res.redirect('/tasks')  
 }
 

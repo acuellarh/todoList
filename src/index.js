@@ -8,6 +8,7 @@ const path = require('path')
 const hbs = require('express-handlebars');
 const cookieSession = require('cookie-session')
 const methodOverride = require('method-override')
+const flash = require('connect-flash')
 const taskRoutes = require('./routes/task.routes');
 const userRoutes = require('./routes/user.routes');
 
@@ -20,7 +21,15 @@ app.use(express.json())
 app.use(cookieSession({ 
     secret: "session" ,
     maxAge: 24 * 60 * 60 * 1000
-  }));
+}));
+
+app.use(flash())
+
+// Global Variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg')
+  next()
+})
 
 app.use(methodOverride('_method', {methods: ["POST", "GET"]}))
 
