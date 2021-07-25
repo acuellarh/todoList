@@ -15,6 +15,7 @@ const createUser = async (req, res ) => {
       email: req.body.email,
       password: req.body.password
     })
+    req.flash('success_msg', 'User Registered Successfully')
     res.redirect("/login")    
   } catch (error) {
     throw new Error(error)
@@ -31,9 +32,11 @@ const loginUser =  async (req, res) => {
     //Si la autenticación es correcta, guarda en la sesion el id del usuario
     if(user){
       req.session.userId = user._id
+      req.flash('success_msg', 'User Logged Successfully')
       return res.redirect('/tasks')
     } else {
-      res.render('/login', {error: 'Wrong email or password. Try again!'})
+      req.flash('danger_msg', 'Wrong email or password. Try again!')
+      res.redirect('/login')
     }
   } catch (error) {
     throw new Error(error)
