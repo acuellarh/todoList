@@ -2,7 +2,6 @@ const User  = require('../models/modelUser')
 const app = require("../index");
 
 
-
 //routes
 
 const createUserForm = (req, res) => {

@@ -4,9 +4,7 @@ const app = require("../index");
 
 const getHome = (req, res) => {
   try {
-    //res.render('index')  
-    req.session.views = (req.session.views || 0) + 1
-    res.render('index', {views:req.session.views} )
+    res.render('index')
 
   } catch (error) {
     throw new Error(error)

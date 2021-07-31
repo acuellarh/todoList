@@ -67,8 +67,23 @@ app.engine('.hbs', hbs({
  
 app.set('view engine', 'hbs')
 
-app.use('/', taskRoutes )
-app.use('/', userRoutes )
+app.use(taskRoutes )
+app.use(userRoutes )
+
+app.use((err, req, res, next) => {
+
+  if (err.statusCode === 400) {
+      
+      const errors = [];
+      errors.push({ text: err.message })
+      res.status(err.statusCode).render("register", {
+          errors,
+      });
+  } else {
+      res.status(500).render('errors/serverError')
+  }   
+
+});
 
 module.exports = app;
 
