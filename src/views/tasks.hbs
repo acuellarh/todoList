@@ -18,7 +18,7 @@
           <div>
             <form action="/tasks/status/{{_id}}" method="POST">
               {{#if status}}
-                <input class="form-check-input mt-2 mx-1" type="checkbox" id="{{_id}}" name="statuscheck" onChange="this.form.submit()" aria-label="..." checked>
+                <input class="form-check-input mt-2 mx-1" type="checkbox" id="{{_id}}" name="statuscheck" onChange="this.form.submit()" aria-label="..." checked >
                 <span class="badge rounded-pill bg-success">Finished</span>
               {{else}}
                 <input class="form-check-input mt-2 mx-1" type="checkbox" id="{{_id}}" name="statuscheck" onChange="this.form.submit()" aria-label="...">
@@ -27,8 +27,8 @@
             </form>
           </div>  
         </td>     
-        <td><a href="/tasks/edit/{{_id}}"><i class="fas fa-edit""></i> </a></td> 
-        <td><a href="/tasks/delete/{{_id}}?_method=DELETE"><i class="fas fa-trash-alt"></i> </a></td>       
+        <td><a class="text-secondary" href="/tasks/edit/{{_id}}"><i class="fas fa-edit""></i> </a></td> 
+        <td><a class="text-danger" href="/tasks/delete/{{_id}}?_method=DELETE"><i class="fas fa-trash-alt"></i> </a></td>       
       </tr>
     {{/each}} 
     </tbody>
