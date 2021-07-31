@@ -25,6 +25,8 @@ app.use(cookieSession({
 
 app.use(flash())
 
+
+
 // Global Variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg'),
@@ -70,6 +72,9 @@ app.set('view engine', 'hbs')
 app.use(taskRoutes )
 app.use(userRoutes )
 
+// static files
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use((err, req, res, next) => {
 
   if (err.statusCode === 400) {
@@ -80,7 +85,9 @@ app.use((err, req, res, next) => {
           errors,
       });
   } else {
-      res.status(500).render('errors/serverError')
+    //   res.status(500).render('errors/serverError')
+     // res.status(500).redirect('login')
+     console.log(err)
   }   
 
 });
