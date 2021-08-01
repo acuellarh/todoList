@@ -48,8 +48,8 @@ const logoutUser =  (req, res) => {
   req.session = null
   //limpia las cookies
   res.clearCookie('session')
-  res.clearCookie('session.sig')
-  res.redirect('/login')
+  res.clearCookie('session.sig')  
+  res.render('home')
 }
 
 
